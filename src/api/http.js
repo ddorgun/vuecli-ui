@@ -24,9 +24,10 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   responseSuccess,
   (error) => {
-    if (error.satus === 401 && error.config) {
+    if (error.response.satus === 401 && error.response.config) {
       store.dispatch('auth/logout');
     }
+    console.log(error.response);
     Promise.reject(error);
   },
 );

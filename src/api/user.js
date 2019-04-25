@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import commonApi from './http';
 
-export function user() {
-  return commonApi.get('/user');
+export function getUsers() {
+  return commonApi.get('/users');
 }
 
-export default {
-  user,
-};
+export function getUser(id) {
+  return commonApi.get(`/users/${id}`);
+}

@@ -21,17 +21,13 @@
       <router-view></router-view>
     </v-content>
   </v-app> -->
-  <layout></layout>
+  <router-view></router-view>
 </template>
 
 <script>
-import { Layout } from '@/components';
 
 export default {
   name: 'App',
-  components: {
-    Layout,
-  },
 };
 </script>
 

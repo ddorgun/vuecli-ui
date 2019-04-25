@@ -2,15 +2,16 @@
 export default {
   namespaced: true,
   state: {
-
+    routerLoader: false,
+  },
+  getters: {
+    getRouterLoader: state => state.routerLoader,
   },
   mutations: {
-    login(store, payload) {
-      console.log(store, payload);
-    },
-    logout(store) {
+    routerLoader(store, payload) {
+      console.log('store routerLoader', payload);
       const state = store;
-      state.accessToken = null;
+      state.routerLoader = payload;
     },
   },
   actions: {

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { authentication, unAuthentication, authorizedEndpoint } from '@/api/authentication';
 
-const ACCESS_TOKEN = 'access-token';
+const ACCESS_TOKEN = 'x-access-token';
 
 export default {
   namespaced: true,
@@ -33,8 +33,10 @@ export default {
       //   .then(data => commit('login', data));
       try {
         const auth = await authentication();
-        console.log(auth);
+        // console.log(auth);
         commit('login', auth.data);
+        // const user = await authentication();
+        // console.log(user);
       } catch (error) {
         console.log('login error', error);
       }

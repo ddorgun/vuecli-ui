@@ -3,6 +3,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from './store';
 import Home from './views/Home.vue';
+import Login from './views/Login.vue';
+import homeChildRouter from './modules/moduleRouter';
 
 Vue.use(Router);
 
@@ -14,11 +16,12 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home,
+      children: homeChildRouter,
     },
     {
       path: '/login',
       name: 'login',
-      component: Home,
+      component: Login,
     },
     {
       path: '/about',
@@ -48,6 +51,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   console.log('beforeEach');
+  store.commit('store/routerLoader', true);
   const loginPath = {
     path: '/login',
     query: { redirect: to.fullPath },
@@ -65,6 +69,11 @@ router.beforeEach((to, from, next) => {
 router.beforeResolve((to, from, next) => {
   console.log('beforeResolve');
   next();
+});
+
+router.afterEach(() => {
+  console.log('afterEach');
+  store.commit('store/routerLoader', false);
 });
 
 export default router;

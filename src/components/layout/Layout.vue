@@ -1,5 +1,7 @@
 <template>
   <v-app :dark="dark">
+    <v-progress-linear v-if="getRouterLoader"
+      :indeterminate="true" class="progress"></v-progress-linear>
     <tool-bar :expand="primaryDrawer.mini" @update:expand="toggle"></tool-bar>
     <v-navigation-drawer
       v-model="primaryDrawer.model"
@@ -24,6 +26,7 @@
                 <v-layout row wrap>
                   <v-flex xs12 md6>
                     <span>Scheme</span>
+                    1111{{getRouterLoader}}
                     <v-switch v-model="dark" primary label="Dark"></v-switch>
                   </v-flex>
                   <v-flex xs12 md6>
@@ -65,7 +68,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import ToolBar from './ToolBar.vue';
 import Menus from './Menus.vue';
 
@@ -73,6 +76,9 @@ export default {
   components: {
     ToolBar,
     Menus,
+  },
+  computed: {
+    ...mapGetters('store', ['getRouterLoader']),
   },
   data: () => ({
     dark: true,
@@ -96,3 +102,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.progress {
+  z-index: 10;
+  margin: 0;
+  position: absolute;
+}
+</style>

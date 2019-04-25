@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 import commonApi from './http';
 
-export function authentication() {
-  return commonApi.get('/login');
+export function authentication(lgoinUser) {
+  // return commonApi.post('/login', { userId: 'test', password: '1234' });
+  return commonApi.post('/login', lgoinUser);
 }
 
 export function unAuthentication() {
