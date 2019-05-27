@@ -18,7 +18,7 @@ instance.interceptors.request.use(
     config['x-access-token'] = store.getters['auth/accessToken'];
     return config;
   },
-  error => Promise.reject(error),
+  error => Promise.reject(error.response),
 );
 
 instance.interceptors.response.use(
@@ -28,7 +28,7 @@ instance.interceptors.response.use(
       store.dispatch('auth/logout');
     }
     console.log(error.response);
-    Promise.reject(error);
+    return Promise.reject(error.response);
   },
 );
 

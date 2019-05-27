@@ -28,17 +28,17 @@ export default {
     },
   },
   actions: {
-    async login({ commit }) {
+    async login({ commit }, payload) {
       // return axios.get(`${BASE_URL}data/auth.json`)
       //   .then(data => commit('login', data));
       try {
-        const auth = await authentication();
-        // console.log(auth);
+        const auth = await authentication(payload);
         commit('login', auth.data);
         // const user = await authentication();
         // console.log(user);
       } catch (error) {
         console.log('login error', error);
+        throw error;
       }
     },
     async logout({ commit }) {

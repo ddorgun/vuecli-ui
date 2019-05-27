@@ -54,19 +54,21 @@ export default {
     id: '',
     idRules: [
       v => !!v || 'ID를 입력해 주세요',
-      v => (v && v.length >= 8) || 'ID는 8자리 이상입니다.',
+      v => (v && v.length >= 4) || 'ID는 4자리 이상입니다.',
     ],
     password: '',
     passwordRules: [
       v => !!v || '비밀번호 를 입력해 주세요',
-      v => (v && v.length >= 8) || '비밀번호는 8자리 이상입니다.',
+      v => (v && v.length >= 4) || '비밀번호는 4자리 이상입니다.',
     ],
   }),
   methods: {
     login() {
       if (this.$refs.form.validate()) {
         console.log(this.$refs.form);
-        this.$store.dispatch('auth/login', { userId: this.id, password: this.password });
+        this.$store.dispatch('auth/login', { userId: this.id, password: this.password })
+          .then(() => this.$router.push({ path: this.$route.query.redirect }))
+          .catch(e => console.log(e));
       }
     },
   },
